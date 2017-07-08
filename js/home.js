@@ -53,31 +53,31 @@ Enemy.prototype.move = function(currentSpeed)
 {
   var moveDir = game.rnd.integerInRange(1,4);
 
-  if (moveDir == 1)
-  {
-
-  }
-
-  if (cursors.left.isDown)
-  {
-      tank.angle = 180;
-      currentSpeed = 300;
-  }
-  else if (cursors.right.isDown)
-  {
-      tank.angle = 0;
-      currentSpeed = 300;
-  }
-  if (cursors.up.isDown)
-  {
-      tank.angle = 270;
-      currentSpeed = 300;
-  }
-  else if (cursors.down.isDown)
-  {
-      tank.angle = 90;
-      currentSpeed = 300;
-  }
+  // if (moveDir == 1)
+  // {
+  //
+  // }
+  //
+  // if (cursors.left.isDown)
+  // {
+  //     tank.angle = 180;
+  //     currentSpeed = 300;
+  // }
+  // else if (cursors.right.isDown)
+  // {
+  //     tank.angle = 0;
+  //     currentSpeed = 300;
+  // }
+  // if (cursors.up.isDown)
+  // {
+  //     tank.angle = 270;
+  //     currentSpeed = 300;
+  // }
+  // else if (cursors.down.isDown)
+  // {
+  //     tank.angle = 90;
+  //     currentSpeed = 300;
+  // }
 
 
   if(this.currentSpeed > 0)
