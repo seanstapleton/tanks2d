@@ -1,74 +1,3 @@
-Enemy = function(index, game, x, y, player, bullets) {
-  this.game = game;
-  this.player = player;
-  this.bullets = bullets;
-  this.fireRate = 1000;
-  this.nextFire = 0;
-  this.alive = true;
-  this.currentSpeed = 0;
-
-  this.tank = game.add.sprite(x, y, 'enemy', 'tank1');
-  this.turret = game.add.sprite(x, y, 'enemy', 'turret');
-  this.tank.scale.setTo(.75,.75);
-  this.turret.scale.setTo(.75,.75);
-  this.tank.anchor.set(0.5
-  );
-  this.turret.anchor.set(0.3, 0.5);
-
-  this.tank.name = index.toString();
-  game.physics.enable(this.tank, Phaser.Physics.ARCADE);
-  this.tank.body.immovable = false;
-  this.tank.body.collideWorldBounds = true;
-  this.tank.body.maxVelocity.setTo(300, 300);
-  this.tank.rotation = 0;
-};
-
-Enemy.prototype.update = function(){
-  this.turret.x = this.tank.x;
-  this.turret.y = this.tank.y;
-  this.turret.rotation = this.tank.rotation;
-
-  if (this.game.physics.arcade.distanceBetween(this.tank, this.player) < 300)
-  {
-      if (this.game.time.now > this.nextFire )
-      {
-          this.nextFire = this.game.time.now + this.fireRate;
-
-          var bullet = this.bullets.getFirstExists(false);
-
-          bullet.reset(this.turret.x, this.turret.y);
-          bullet.angle = this.tank.angle;
-          game.physics.arcade.velocityFromAngle(bullet.angle,500,bullet.body.velocity);
-      }
-  }
-  this.move();
-
-};
-
-Enemy.prototype.move = function(currentSpeed)
-{
-  var moveDir = game.rnd.integerInRange(1,100);
-  this.currentSpeed = 200;
-
-  if (moveDir == 1)
-  {
-    this.tank.angle = 90;
-  }
-  else if (moveDir == 2)
-  {
-    this.tank.angle = 180;
-  }
-  else if (moveDir == 3)
-  {
-    this.tank.angle = 270;
-  }
-  else if (moveDir == 4)
-  {
-    this.tank.angle = 0;
-  }
-
-  game.physics.arcade.velocityFromAngle(this.tank.angle,this.currentSpeed,this.tank.body.velocity);
-};
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 function preload() {
@@ -219,6 +148,7 @@ function update() {
     fire();
   }
 }
+
 function fire () {
     if (game.time.now > nextFire && bullets.countDead() > 0)
     {
@@ -229,6 +159,80 @@ function fire () {
         game.physics.arcade.velocityFromAngle(bullet.angle,500,bullet.body.velocity);
     }
 }
+Enemy = function(index, game, x, y, player, bullets) {
+  this.game = game;
+  this.player = player;
+  this.bullets = bullets;
+  this.fireRate = 1000;
+  this.nextFire = 0;
+  this.alive = true;
+  this.currentSpeed = 0;
+
+  this.tank = game.add.sprite(x, y, 'enemy', 'tank1');
+  this.turret = game.add.sprite(x, y, 'enemy', 'turret');
+  this.tank.scale.setTo(.75,.75);
+  this.turret.scale.setTo(.75,.75);
+  this.tank.anchor.set(0.5
+  );
+  this.turret.anchor.set(0.3, 0.5);
+
+  this.tank.name = index.toString();
+  game.physics.enable(this.tank, Phaser.Physics.ARCADE);
+  this.tank.body.immovable = false;
+  this.tank.body.collideWorldBounds = true;
+  this.tank.body.maxVelocity.setTo(300, 300);
+  this.tank.rotation = 0;
+};
+
+Enemy.prototype.update = function(){
+  this.turret.x = this.tank.x;
+  this.turret.y = this.tank.y;
+  this.turret.rotation = this.tank.rotation;
+
+  if (this.game.physics.arcade.distanceBetween(this.tank, this.player) < 300)
+  {
+      if (this.game.time.now > this.nextFire )
+      {
+          this.nextFire = this.game.time.now + this.fireRate;
+
+          var bullet = this.bullets.getFirstExists(false);
+
+          bullet.reset(this.turret.x, this.turret.y);
+          bullet.angle = this.tank.angle;
+          game.physics.arcade.velocityFromAngle(bullet.angle,500,bullet.body.velocity);
+      }
+  }
+  this.move();
+
+};
+
+Enemy.prototype.move = function(currentSpeed)
+{
+  var moveDir = game.rnd.integerInRange(1,100);
+  this.currentSpeed = 200;
+
+  if (moveDir == 1)
+  {
+    this.tank.angle = 90;
+  }
+  else if (moveDir == 2)
+  {
+    this.tank.angle = 180;
+  }
+  else if (moveDir == 3)
+  {
+    this.tank.angle = 270;
+  }
+  else if (moveDir == 4)
+  {
+    this.tank.angle = 0;
+  }
+
+  game.physics.arcade.velocityFromAngle(this.tank.angle,this.currentSpeed,this.tank.body.velocity);
+};
+
+
 
 function render () {
+
 }
