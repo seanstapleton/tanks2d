@@ -51,13 +51,27 @@ Enemy.prototype.update = function(){
 
 Enemy.prototype.move = function(currentSpeed)
 {
-  var moveDir = game.rnd.integerInRange(1,4);
+  var moveDir = game.rnd.integerInRange(1,100);
+  this.currentSpeed = 200;
 
-  // if (moveDir == 1)
-  // {
-  //
-  // }
-  //
+
+  if (moveDir == 1)
+  {
+    this.tank.angle = 90;
+  }
+  else if (moveDir == 2)
+  {
+    this.tank.angle = 180;
+  }
+  else if (moveDir == 3)
+  {
+    this.tank.angle = 270;
+  }
+  else if (moveDir == 4)
+  {
+    this.tank.angle = 0;
+  }
+
   // if (cursors.left.isDown)
   // {
   //     tank.angle = 180;
@@ -80,10 +94,10 @@ Enemy.prototype.move = function(currentSpeed)
   // }
 
 
-  if(this.currentSpeed > 0)
-  {
-    this.currentSpeed -= 4;
-  }
+  // if(this.currentSpeed > 0)
+  // {
+  //   this.currentSpeed -= 4;
+  // }
   game.physics.arcade.velocityFromAngle(this.tank.angle,this.currentSpeed,this.tank.body.velocity);
 };
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
@@ -184,6 +198,11 @@ function create() {
 
   fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
+  for (var i = 0; i < bullets.children.length; i++){
+    bullets.children[i].body.setSize(10,10,10,0);
+  }
+
+
 }
 
 function kill_bullet(bullet,wall=null){
@@ -214,6 +233,7 @@ function update() {
   // game.physics.arcade.overlap(bullets, enemies, bulletHitEnemy);
   game.physics.arcade.overlap(tank, enemyBullets, enemyBulletHitTank);
 
+
   for (var i = 0; i < enemies.length; i++)
   {
       if (enemies[i].alive)
@@ -223,6 +243,8 @@ function update() {
           game.physics.arcade.collide(enemies[i].tank, collisionsLayer);
           game.physics.arcade.overlap(enemies[i].tank, bullets, bulletHitEnemy);
           enemies[i].update();
+
+
       }
   }
 
