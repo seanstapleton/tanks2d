@@ -1,14 +1,26 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 
 function preload() {
-  game.load.atlas('tank', 'assets/tanks.png', 'assets/tanks.json');
-  game.load.atlas('enemy', 'assets/enemy-tanks.png', 'assets/tanks.json');
-  game.load.image('logo', 'assets/logo.png');
-  game.load.image('bullet', 'assets/bullet.png');
-  game.load.image('earth', 'assets/scorched_earth.png');
-  game.load.spritesheet('kaboom', 'assets/explosion.png', 64, 64, 23);
-  game.load.tilemap('map','assets/map.json',null,Phaser.Tilemap.TILED_JSON);
-  game.load.image('tiles','assets/gridtiles.png');
+  // game.load.atlas('tank', 'assets/tanks.png', 'assets/tanks.json');
+  // game.load.atlas('enemy', 'assets/enemy-tanks.png', 'assets/tanks.json');
+  // game.load.image('logo', 'assets/logo.png');
+  // game.load.image('bullet', 'assets/bullet.png');
+  // game.load.image('earth', 'assets/scorched_earth.png');
+  // game.load.spritesheet('kaboom', 'assets/explosion.png', 64, 64, 23);
+  // game.load.tilemap('map','assets/map.json',null,Phaser.Tilemap.TILED_JSON);
+  // game.load.image('tiles','assets/gridtiles.png');
+
+    game.load.crossOrigin = "anonymous";
+
+    game.load.tilemap('map','https://dl.dropboxusercontent.com/s/lwitgju2uwdiv85/map.json?dl=0',null,Phaser.Tilemap.TILED_JSON);
+    game.load.image('tiles','https://dl.dropboxusercontent.com/s/5dxkk92k1jf7zp6/gridtiles.png?dl=0');
+
+    game.load.atlas('tank', 'http://examples.phaser.io/assets/games/tanks/tanks.png', 'http://examples.phaser.io/assets/games/tanks/tanks.json');
+    game.load.atlas('enemy', 'http://examples.phaser.io/assets/games/tanks/enemy-tanks.png', 'http://examples.phaser.io/assets/games/tanks/tanks.json');
+    game.load.image('logo', 'http://examples.phaser.io/assets/games/tanks/logo.png');
+    game.load.image('bullet', 'http://examples.phaser.io/assets/games/tanks/bullet.png');
+    game.load.image('earth', 'http://examples.phaser.io/assets/games/tanks/scorched_earth.png');
+    game.load.spritesheet('kaboom', 'http://examples.phaser.io/assets/games/tanks/explosion.png', 64, 64, 23);
 }
 
 var map, shadow, tank, turret, enemy, enemies, enemyTurrets, enemyBullets, explosions, cursors, bullets, logo, fireButton,floorLayer,enemiesLayer,collisionsLayer;
